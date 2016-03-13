@@ -1,6 +1,6 @@
 (ns nubank.core-test
   (:require [clojure.test :refer :all]
-            [nubank.core :refer :all]))
+            [nubank.shortest-path :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
