@@ -43,8 +43,8 @@
 (defn ^:private sort-map-by-value [map]
   (into (sorted-map-by (fn [key1 key2]
                          (compare
-                           [(get map key1)  key1]
-                           [(get map key2) key2])))
+                           [(get map key2) key2]
+                           [(get map key1)  key1])))
         map))
 
 ; interface
@@ -58,5 +58,3 @@
         (social-network/get-graph)))))
 
 (def shortes-path dijkstra)
-
-(println (closeness-map))
