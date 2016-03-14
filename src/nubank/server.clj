@@ -62,14 +62,14 @@
              :handle-ok (fn [_] (json/write-str (ok-func))))
 
 
-; ---- Routes ----;
+; ---- Routes ---- ;
 (defroutes app
            (ANY "/vertex" [] (vertex-resource
                                graph/add-vertex
-                               shortest-path/closeness-map)))
+                               shortest-path/centrality-map)))
 
 
-; ---- Main handler ----;
+; ---- Main handler ---- ;
 (def handler
   (-> app
       wrap-params))
