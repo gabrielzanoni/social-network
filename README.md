@@ -45,6 +45,8 @@ $ lein test
 ```
 
 ## Endpoints
+All the requests are saved on the file ```dhc-social-network.json``` which can be use in the chrome estension [DHC](https://chrome.google.com/webstore/detail/dhc-rest-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en).
+
 - Vertex list with centrality values:
 ```
 Method: GET
