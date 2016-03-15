@@ -5,17 +5,16 @@
 
 
 ; ---- Initial values ---- ;
-(def inital-score shortest-path/centrality-map)
 
 ; Vertex with "0" value is a fraudulent costumer
 (def fraudulent-map (ref
                      (zipmap
-                       (graph/vertex)
+                       (graph/vertex @graph/nodes)
                        (repeat 1))))
 
 (def initial-coefficient-f-map (zipmap
-                         (graph/vertex)
-                         (repeat 1)))
+                                 (graph/vertex @graph/nodes)
+                                 (repeat 1)))
 
 
 ; ---- Main functions ---- ;
@@ -44,7 +43,7 @@
     (merge-with
       *
       (coefficient-f-map initial-coefficient-f-map @fraudulent-map)
-      (shortest-path/centrality-map))))
+      (shortest-path/centrality-map (graph/get-graph)))))
 
 (defn set-fraudulent-node [node]
   (dosync

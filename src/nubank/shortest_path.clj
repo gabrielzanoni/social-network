@@ -1,5 +1,4 @@
 (ns nubank.shortest-path
-  (:require [nubank.graph :as social-network])
   (:require [nubank.helper :as helper]))
 
 (def ^:private inf Double/POSITIVE_INFINITY)
@@ -7,8 +6,7 @@
 
 ; ---- Main functions ---- ;
 
-(defn ^:private update-costs
-  [g costs unvisited curr]
+(defn update-costs [g costs unvisited curr]
   (let [curr-cost (get costs curr)]
     (reduce
       (fn [c nbr]
@@ -19,24 +17,18 @@
       (get g curr))))
 
 
-(defn ^:private dijkstra
-  ([g src]
-   (dijkstra g src nil))
-  ([g src dst]
+(defn ^:private dijkstra [g src]
    (loop [costs (assoc (helper/set-all-map-values g inf) src 0)
           curr src
           unvisited (disj (apply hash-set (keys g)) src)]
      (cond
-       (= curr dst)
-       (select-keys costs [dst])
-
        (or (empty? unvisited) (= inf (get costs curr)))
        costs
 
        :else
        (let [next-costs (update-costs g costs unvisited curr)
              next-node (apply min-key next-costs unvisited)]
-         (recur next-costs next-node (disj unvisited next-node)))))))
+         (recur next-costs next-node (disj unvisited next-node))))))
 
 (defn ^:private get-farness-map [graph]
   (reduce
@@ -46,13 +38,13 @@
 
 
 ; ---- Interface ---- ;
-(defn centrality-map []
+(defn centrality-map [graph]
   (helper/sort-map-by-value
     (reduce
       (fn [acc [key value]]
         (assoc acc key (/ 1 value)))
       {}
       (get-farness-map
-        (social-network/get-graph)))))
+        graph))))
 
 (def shortest-path dijkstra)

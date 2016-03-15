@@ -86,14 +86,14 @@
 ; ---- Routes ---- ;
 (defroutes app
            (ANY "/vertex" [] (vertex-resource
-                                          graph/add-vertex
-                                          score/get-scores))
+                               (partial graph/add-node graph/nodes)
+                               score/get-scores))
 
            (ANY "/fraudulent" [] (fraudulent-resource
                                    score/set-fraudulent-node))
 
            (ANY "/vertex-centrality" [] (centrality-resource
-                                          shortest-path/centrality-map)))
+                                          (partial shortest-path/centrality-map (graph/get-graph)))))
 
 ; ---- Main handler ---- ;
 (def handler

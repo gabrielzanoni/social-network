@@ -10,4 +10,4 @@
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [liberator "0.13"]
                  [compojure "1.3.4"]
-                 [ring/ring-core "1.2.1"]])
+                 [ring/ring-core "1.4.0"]])
