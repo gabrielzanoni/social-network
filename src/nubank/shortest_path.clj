@@ -21,11 +21,10 @@
    (loop [costs (assoc (helper/set-all-map-values g inf) src 0)
           curr src
           unvisited (disj (apply hash-set (keys g)) src)]
-     (cond
-       (or (empty? unvisited) (= inf (get costs curr)))
+
+     (if (or (empty? unvisited) (= inf (get costs curr)))
        costs
 
-       :else
        (let [next-costs (update-costs g costs unvisited curr)
              next-node (apply min-key next-costs unvisited)]
          (recur next-costs next-node (disj unvisited next-node))))))
