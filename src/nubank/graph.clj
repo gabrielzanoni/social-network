@@ -10,6 +10,9 @@
       (into {} @nodes)
       (set/map-invert (into {} @nodes)))))
 
+(defn has-key [key]
+  (some #{key} (vertex)))
+
 (defn ^:private transitions
   [graph node]
   (into

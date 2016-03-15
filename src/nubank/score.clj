@@ -46,4 +46,6 @@
       (coefficient-f-map initial-coefficient-f-map @fraudulent-map)
       (shortest-path/centrality-map))))
 
-(println (get-scores))
+(defn set-fraudulent-node [node]
+  (dosync
+    (alter fraudulent-map assoc node 0)))
